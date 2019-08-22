@@ -119,5 +119,14 @@ namespace Microsoft.Health.Fhir.Core.Extensions
             var response = await mediator.Send(new GetCapabilitiesRequest(), cancellationToken);
             return response.CapabilityStatement;
         }
+
+        public static async Task<ResourceElement> GetOperationVersionsAsync(this IMediator mediator, CancellationToken cancellationToken = default)
+        {
+            EnsureArg.IsNotNull(mediator, nameof(mediator));
+
+            var response = await mediator.Send(new GetOperationVersionsRequest(), cancellationToken);
+
+            return response.OperationVersionsStatement;
+        }
     }
 }

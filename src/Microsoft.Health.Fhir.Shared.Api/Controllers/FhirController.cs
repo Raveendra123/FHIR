@@ -457,5 +457,18 @@ namespace Microsoft.Health.Fhir.Api.Controllers
 
             return FhirResult.Create(response);
         }
+
+        /// <summary>
+        /// Returns the list of versions the server supports along with the default version it will use if no fhirVersion parameter is present.
+        /// </summary>
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(KnownRoutes.Versions)]
+        public async Task<IActionResult> Versions()
+        {
+            ResourceElement response = await _mediator.GetOperationVersionsAsync(HttpContext.RequestAborted);
+
+            return FhirResult.Create(response);
+        }
     }
 }
